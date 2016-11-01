@@ -20,9 +20,9 @@ namespace UnitTestProject1
             customList.Add(second);
             customList.Add(third);
             //Assert
-            Assert.AreEqual(first, customList.ReturnAt(0));
-            Assert.AreEqual(second, customList.ReturnAt(1));
-            Assert.AreEqual(third, customList.ReturnAt(2));
+            Assert.AreEqual(first, customList[0]);
+            Assert.AreEqual(second, customList[1]);
+            Assert.AreEqual(third, customList[2]);
         }
         [TestMethod]
         public void RemoveAllOfItemInList()
@@ -36,7 +36,7 @@ namespace UnitTestProject1
             //Act
             customList.Remove(2);
             //Assert
-            Assert.AreEqual(1, customList.ReturnAt(0));
+            Assert.AreEqual(1, customList[0]);
         }
         [TestMethod]
         public void RemoveAtIndexInList()
@@ -49,7 +49,7 @@ namespace UnitTestProject1
             //Act
             customList.RemoveAt(0);
             //Assert
-            Assert.AreEqual(2, customList.ReturnAt(0));
+            Assert.AreEqual(2, customList[0]);
         }
         [TestMethod]
         public void GetCountOfList()
@@ -96,14 +96,14 @@ namespace UnitTestProject1
             //Act
             customList3 = customList.Zipper(customList2);
             //Assert
-            Assert.AreEqual(1, customList3.ReturnAt(0));
-            Assert.AreEqual(2, customList3.ReturnAt(1));
-            Assert.AreEqual(3, customList3.ReturnAt(2));
-            Assert.AreEqual(4, customList3.ReturnAt(3));
-            Assert.AreEqual(5, customList3.ReturnAt(4));
-            Assert.AreEqual(6, customList3.ReturnAt(5));
-            Assert.AreEqual(7, customList3.ReturnAt(6));
-            Assert.AreEqual(8, customList3.ReturnAt(7));
+            Assert.AreEqual(1, customList3[0]);
+            Assert.AreEqual(2, customList3[1]);
+            Assert.AreEqual(3, customList3[2]);
+            Assert.AreEqual(4, customList3[3]);
+            Assert.AreEqual(5, customList3[4]);
+            Assert.AreEqual(6, customList3[5]);
+            Assert.AreEqual(7, customList3[6]);
+            Assert.AreEqual(8, customList3[7]);
         }
         [TestMethod]
         public void OverloadPlusOperator()
@@ -124,15 +124,15 @@ namespace UnitTestProject1
             //Act
             customList3 = customList + customList2;
             //Assert
-            Assert.AreEqual(1, customList3.ReturnAt(0));
-            Assert.AreEqual(3, customList3.ReturnAt(1));
-            Assert.AreEqual(5, customList3.ReturnAt(2));
-            Assert.AreEqual(7, customList3.ReturnAt(3));
-            Assert.AreEqual(2, customList3.ReturnAt(4));
-            Assert.AreEqual(4, customList3.ReturnAt(5));
-            Assert.AreEqual(6, customList3.ReturnAt(6));
-            Assert.AreEqual(8, customList3.ReturnAt(7));
-            Assert.AreEqual(9, customList3.ReturnAt(8));
+            Assert.AreEqual(1, customList3[0]);
+            Assert.AreEqual(3, customList3[1]);
+            Assert.AreEqual(5, customList3[2]);
+            Assert.AreEqual(7, customList3[3]);
+            Assert.AreEqual(2, customList3[4]);
+            Assert.AreEqual(4, customList3[5]);
+            Assert.AreEqual(6, customList3[6]);
+            Assert.AreEqual(8, customList3[7]);
+            Assert.AreEqual(9, customList3[8]);
         }
         [TestMethod]
         public void OverloadMinusOperator()
@@ -153,8 +153,8 @@ namespace UnitTestProject1
             //Act
             customList3 = customList - customList2;
             //Assert
-            Assert.AreEqual(5, customList3.ReturnAt(0));
-            Assert.AreEqual(7, customList3.ReturnAt(1));
+            Assert.AreEqual(5, customList3[0]);
+            Assert.AreEqual(7, customList3[1]);
         }
     }
 }

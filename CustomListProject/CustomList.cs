@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomListProject
 {
-    public class CustomList<T> : IEnumerable
+    public class CustomList<T> : CollectionBase, IEnumerable, IComparer
 
     {
         private int size;
@@ -19,12 +19,27 @@ namespace CustomListProject
             buffer = 8;
             items = new T[buffer];
         }
-        public IEnumerator GetEnumerator()
+        public T this[int index]
+        {
+            get
+            {
+                return (T)this.items[index];
+            }
+            set
+            {
+                this.items[index] = value;
+            }
+        }
+        public new IEnumerator GetEnumerator()
         {
             for (int i = 0; i < size; i++)
             {
                 yield return items[i];
             }
+        }
+        public int Compare(object first, object second)
+        {
+            return (new CaseInsensitiveComparer()).Compare(second, first);
         }
         public void Add(T item)
         {
@@ -56,7 +71,7 @@ namespace CustomListProject
                 index = IndexOf(item);
             }
         }
-        public void RemoveAt(int index)
+        public new void RemoveAt(int index)
         {
             if(index >= 0 && index < size)
             {
@@ -67,13 +82,9 @@ namespace CustomListProject
                 size--;
             }
         }
-        public int Count()
+        public new int Count()
         {
             return size;
-        }
-        public T ReturnAt(int index)
-        {
-            return items[index];
         }
         public override string ToString()
         {
@@ -92,7 +103,7 @@ namespace CustomListProject
                 for (int i = 0; i < zipperList.size; i++)
                 {
                     list.Add(items[i]);
-                    list.Add(zipperList.items[i]);
+                    list.Add(zipperList[i]);
                 }
             } 
             else if (zipperList.size > size)
@@ -100,7 +111,7 @@ namespace CustomListProject
                 for (int i = 0; i < size; i++)
                 {
                     list.Add(items[i]);
-                    list.Add(zipperList.items[i]);
+                    list.Add(zipperList[i]);
                 }
             }
             return list;
@@ -114,7 +125,7 @@ namespace CustomListProject
             }
             for (int i = 0; i < secondList.size; i++)
             {
-                list.Add(secondList.items[i]);
+                list.Add(secondList[i]);
             }   
             return list;
         }
@@ -122,7 +133,7 @@ namespace CustomListProject
         {
             for (int i = 0; i < secondList.size; i++)
             {
-                firstList.Remove(secondList.items[i]);
+                firstList.Remove(secondList[i]);
             }
             return firstList;
         }
