@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomListProject
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable
 
     {
         private int size;
@@ -18,6 +18,13 @@ namespace CustomListProject
             size = 0;
             buffer = 8;
             items = new T[buffer];
+        }
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                yield return items[i];
+            }
         }
         public void Add(T item)
         {
@@ -77,34 +84,47 @@ namespace CustomListProject
             }
             return itemsStringList.ToString();
         }
-        public void Zipper(CustomList<T> List2)
+        public CustomList<T> Zipper(CustomList<T> zipperList)
         {
-            T[] tempItems = new T[size + List2.size + buffer];
-            if (size >= List2.size)
+            CustomList<T> list = new CustomList<T>();
+            if (size >= zipperList.size)
             {
-                for (int i = 0; i < List2.size; i++)
+                for (int i = 0; i < zipperList.size; i++)
                 {
-                    tempItems[i*2] = items[i];
-                    tempItems[(i*2)+1] = List2.items[i];
-                }
-                for (int i = List2.size*2; i < size+List2.size; i++)
-                {
-                    tempItems[i] = items[i-List2.size];
+                    list.Add(items[i]);
+                    list.Add(zipperList.items[i]);
                 }
             } 
-            else if (List2.size > size)
+            else if (zipperList.size > size)
             {
                 for (int i = 0; i < size; i++)
                 {
-                    tempItems[i*2] = items[i];
-                    tempItems[(i*2)+1] = List2.items[i];
-                }
-                for (int i = size*2; i < List2.size+size; i++)
-                {
-                    tempItems[i] = List2.items[i-size];
+                    list.Add(items[i]);
+                    list.Add(zipperList.items[i]);
                 }
             }
-            items = tempItems;
+            return list;
+        }
+        public static CustomList<T> operator +(CustomList<T> firstList, CustomList<T> secondList)
+        {
+            CustomList<T> list = new CustomList<T>();
+            for (int i = 0; i < firstList.size; i++)
+            {
+                list.Add(firstList.items[i]);
+            }
+            for (int i = 0; i < secondList.size; i++)
+            {
+                list.Add(secondList.items[i]);
+            }   
+            return list;
+        }
+        public static CustomList<T> operator -(CustomList<T> firstList, CustomList<T> secondList)
+        {
+            for (int i = 0; i < secondList.size; i++)
+            {
+                firstList.Remove(secondList.items[i]);
+            }
+            return firstList;
         }
     }
 }
