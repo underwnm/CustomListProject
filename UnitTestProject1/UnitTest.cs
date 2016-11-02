@@ -41,23 +41,23 @@ namespace UnitTestProject1
             Assert.AreEqual(second, results[1]);
             Assert.AreEqual(third, results[2]);
         }
-        //[TestMethod]
-        //public void AddCustomObjectItemToList()
-        //{
-        //    CustomList<Cup> results = new CustomList<Cup>();
-        //    //Arrange
-        //    Cup first = new Cup();
-        //    Cup second = new Cup();
-        //    Cup third = new Cup();
-        //    //Act
-        //    results.Add(first);
-        //    results.Add(second);
-        //    results.Add(third);
-        //    //Assert
-        //    Assert.AreEqual(first, results[0]);
-        //    Assert.AreEqual(second, results[1]);
-        //    Assert.AreEqual(third, results[2]);
-        //}
+        [TestMethod]
+        public void AddCustomObjectItemToList()
+        {
+            CustomList<Item> results = new CustomList<Item>();
+            //Arrange
+            Item first = new Item("first");
+            Item second = new Item("second");
+            Item third = new Item("third");
+            //Act
+            results.Add(first);
+            results.Add(second);
+            results.Add(third);
+            //Assert
+            Assert.AreEqual(first, results[0]);
+            Assert.AreEqual(second, results[1]);
+            Assert.AreEqual(third, results[2]);
+        }
         [TestMethod]
         public void RemoveAllOfSpecificIntItemInList()
         {
@@ -80,17 +80,17 @@ namespace UnitTestProject1
             //Assert
             Assert.AreEqual(expected, results[0]);
         }
-        //[TestMethod]
-        //public void RemoveAllOfSpecificCustomObjectItemInList()
-        //{
-        //    CustomList<Cup> results = new CustomList<Cup>() { new Cup(), new Cup(), new Cup(), new Cup() };
-        //    //Arrange
-        //    Cup expected = results[3];
-        //    //Act
-        //    results.Remove(results[2]);
-        //    //Assert
-        //    Assert.AreEqual(expected, results[2]);
-        //}
+        [TestMethod]
+        public void RemoveAllOfSpecificCustomObjectItemInList()
+        {
+            CustomList<Item> results = new CustomList<Item>() { new Item("first"), new Item("second"), new Item("third"), new Item("fourth") };
+            //Arrange
+            Item expected = results[3];
+            //Act
+            results.Remove(results[2]);
+            //Assert
+            Assert.AreEqual(expected, results[2]);
+        }
         [TestMethod]
         public void RemoveIntAtIndexInList()
         {
@@ -113,17 +113,17 @@ namespace UnitTestProject1
             //Assert
             Assert.AreEqual(expected, results[0]);
         }
-        //[TestMethod]
-        //public void RemoveCustomObjectAtIndexInList()
-        //{
-        //    CustomList<Cup> results = new CustomList<Cup>() { new Cup(), new Cup(), new Cup() };
-        //    //Arrange
-        //    Cup expected = results[1];
-        //    //Act
-        //    results.RemoveAt(0);
-        //    //Assert
-        //    Assert.AreEqual(expected, results[0]);
-        //}
+        [TestMethod]
+        public void RemoveCustomObjectAtIndexInList()
+        {
+            CustomList<Item> results = new CustomList<Item>() { new Item("first"), new Item("second"), new Item("third") };
+            //Arrange
+            Item expected = results[1];
+            //Act
+            results.RemoveAt(0);
+            //Assert
+            Assert.AreEqual(expected, results[0]);
+        }
         [TestMethod]
         public void GetCountOfIntList()
         {
@@ -146,17 +146,17 @@ namespace UnitTestProject1
             //Assert
             Assert.AreEqual(expected, results);
         }
-        //[TestMethod]
-        //public void GetCountOfCustomObjectList()
-        //{
-        //    CustomList<Cup> customList = new CustomList<Cup>() { new Cup(), new Cup(), new Cup(), new Cup(), new Cup() };
-        //    //Arrange
-        //    int expected = 5;
-        //    //Act
-        //    int results = customList.Count();
-        //    //Assert
-        //    Assert.AreEqual(expected, results);
-        //}
+        [TestMethod]
+        public void GetCountOfCustomObjectList()
+        {
+            CustomList<Item> customList = new CustomList<Item>() { new Item("first"), new Item("second"), new Item("third"), new Item("fourth"), new Item("fifth") };
+            //Arrange
+            int expected = 5;
+            //Act
+            int results = customList.Count();
+            //Assert
+            Assert.AreEqual(expected, results);
+        }
         [TestMethod]
         public void IntListToString()
         {
@@ -179,17 +179,17 @@ namespace UnitTestProject1
             //Assert
             Assert.AreEqual(expected, results);
         }
-        //[TestMethod]
-        //public void CustomObjectListToString()
-        //{
-        //    CustomList<Cup> customList = new CustomList<Cup>() { new Cup(), new Cup(), new Cup(), new Cup() };
-        //    //Arrange
-        //    string expected = "UnitTestProject1.CupUnitTestProject1.CupUnitTestProject1.CupUnitTestProject1.Cup";
-        //    //Act
-        //    string results = customList.ToString();
-        //    //Assert
-        //    Assert.AreEqual(expected, results);
-        //}
+        [TestMethod]
+        public void CustomObjectListToString()
+        {
+            CustomList<Item> customList = new CustomList<Item>() { new Item("first"), new Item("second"), new Item("third"), new Item("fourth") };
+            //Arrange
+            string expected = "UnitTestProject1.ItemUnitTestProject1.ItemUnitTestProject1.ItemUnitTestProject1.Item";
+            //Act
+            string results = customList.ToString();
+            //Assert
+            Assert.AreEqual(expected, results);
+        }
         [TestMethod]
         public void ZipperTwoIntLists()
         {
@@ -244,33 +244,33 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedValue7, results[6]);
             Assert.AreEqual(expectedValue8, results[7]);
         }
-        //[TestMethod]
-        //public void ZipperTwoCustomObjectLists()
-        //{
-        //    CustomList<Cup> results = new CustomList<Cup>();
-        //    //Arrange
-        //    Cup expectedValue1 = new Cup();
-        //    Cup expectedValue2 = new Cup();
-        //    Cup expectedValue3 = new Cup();
-        //    Cup expectedValue4 = new Cup();
-        //    Cup expectedValue5 = new Cup();
-        //    Cup expectedValue6 = new Cup();
-        //    Cup expectedValue7 = new Cup();
-        //    Cup expectedValue8 = new Cup();
-        //    CustomList<Cup> oddList = new CustomList<Cup>() { expectedValue1, expectedValue3, expectedValue5, expectedValue7 };
-        //    CustomList<Cup> evenList = new CustomList<Cup>() { expectedValue2, expectedValue4, expectedValue6, expectedValue8 };
-        //    //Act
-        //    results = oddList.Zipper(evenList);
-        //    //Assert
-        //    Assert.AreEqual(expectedValue1, results[0]);
-        //    Assert.AreEqual(expectedValue2, results[1]);
-        //    Assert.AreEqual(expectedValue3, results[2]);
-        //    Assert.AreEqual(expectedValue4, results[3]);
-        //    Assert.AreEqual(expectedValue5, results[4]);
-        //    Assert.AreEqual(expectedValue6, results[5]);
-        //    Assert.AreEqual(expectedValue7, results[6]);
-        //    Assert.AreEqual(expectedValue8, results[7]);
-        //}
+        [TestMethod]
+        public void ZipperTwoCustomObjectLists()
+        {
+            CustomList<Item> results = new CustomList<Item>();
+            //Arrange
+            Item expectedValue1 = new Item("1");
+            Item expectedValue2 = new Item("2");
+            Item expectedValue3 = new Item("3");
+            Item expectedValue4 = new Item("4");
+            Item expectedValue5 = new Item("5");
+            Item expectedValue6 = new Item("6");
+            Item expectedValue7 = new Item("7");
+            Item expectedValue8 = new Item("8");
+            CustomList<Item> oddList = new CustomList<Item>() { expectedValue1, expectedValue3, expectedValue5, expectedValue7 };
+            CustomList<Item> evenList = new CustomList<Item>() { expectedValue2, expectedValue4, expectedValue6, expectedValue8 };
+            //Act
+            results = oddList.Zipper(evenList);
+            //Assert
+            Assert.AreEqual(expectedValue1, results[0]);
+            Assert.AreEqual(expectedValue2, results[1]);
+            Assert.AreEqual(expectedValue3, results[2]);
+            Assert.AreEqual(expectedValue4, results[3]);
+            Assert.AreEqual(expectedValue5, results[4]);
+            Assert.AreEqual(expectedValue6, results[5]);
+            Assert.AreEqual(expectedValue7, results[6]);
+            Assert.AreEqual(expectedValue8, results[7]);
+        }
         [TestMethod]
         public void OverloadPlusOperatorForIntList()
         {
@@ -329,33 +329,33 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedValue8, results[7]);
             Assert.AreEqual(expectedValue10, results[8]);
         }
-        //[TestMethod]
-        //public void OverloadPlusOperatorForCustomObjectList()
-        //{
-        //    CustomList<Cup> results = new CustomList<Cup>();
-        //    //Arrange
-        //    Cup expectedValue1 = new Cup();
-        //    Cup expectedValue2 = new Cup();
-        //    Cup expectedValue3 = new Cup();
-        //    Cup expectedValue4 = new Cup();
-        //    Cup expectedValue5 = new Cup();
-        //    Cup expectedValue6 = new Cup();
-        //    Cup expectedValue7 = new Cup();
-        //    Cup expectedValue8 = new Cup();
-        //    CustomList<Cup> oddList = new CustomList<Cup>() { expectedValue1, expectedValue3, expectedValue5, expectedValue7 };
-        //    CustomList<Cup> evenList = new CustomList<Cup>() { expectedValue2, expectedValue4, expectedValue6, expectedValue8 };
-        //    //Act
-        //    results = oddList + evenList;
-        //    //Assert
-        //    Assert.AreEqual(expectedValue1, results[0]);
-        //    Assert.AreEqual(expectedValue3, results[1]);
-        //    Assert.AreEqual(expectedValue5, results[2]);
-        //    Assert.AreEqual(expectedValue7, results[3]);
-        //    Assert.AreEqual(expectedValue2, results[4]);
-        //    Assert.AreEqual(expectedValue4, results[5]);
-        //    Assert.AreEqual(expectedValue6, results[6]);
-        //    Assert.AreEqual(expectedValue8, results[7]);
-        //}
+        [TestMethod]
+        public void OverloadPlusOperatorForCustomObjectList()
+        {
+            CustomList<Item> results = new CustomList<Item>();
+            //Arrange
+            Item expectedValue1 = new Item("1");
+            Item expectedValue2 = new Item("2");
+            Item expectedValue3 = new Item("3");
+            Item expectedValue4 = new Item("4");
+            Item expectedValue5 = new Item("5");
+            Item expectedValue6 = new Item("6");
+            Item expectedValue7 = new Item("7");
+            Item expectedValue8 = new Item("8");
+            CustomList<Item> oddList = new CustomList<Item>() { expectedValue1, expectedValue3, expectedValue5, expectedValue7 };
+            CustomList<Item> evenList = new CustomList<Item>() { expectedValue2, expectedValue4, expectedValue6, expectedValue8 };
+            //Act
+            results = oddList + evenList;
+            //Assert
+            Assert.AreEqual(expectedValue1, results[0]);
+            Assert.AreEqual(expectedValue3, results[1]);
+            Assert.AreEqual(expectedValue5, results[2]);
+            Assert.AreEqual(expectedValue7, results[3]);
+            Assert.AreEqual(expectedValue2, results[4]);
+            Assert.AreEqual(expectedValue4, results[5]);
+            Assert.AreEqual(expectedValue6, results[6]);
+            Assert.AreEqual(expectedValue8, results[7]);
+        }
         [TestMethod]
         public void OverloadMinusOperatorForIntList()
         {
@@ -386,22 +386,22 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedValue1, results[0]);
             Assert.AreEqual(expectedValue2, results[1]);
         }
-        //[TestMethod]
-        //public void OverloadMinusOperatorForCustomObjectList()
-        //{
-        //    CustomList<Cup> results = new CustomList<Cup>();
-        //    //Arrange
-        //    Cup expectedValue1 = new Cup();
-        //    Cup expectedValue2 = new Cup();
-        //    Cup expectedValue3 = new Cup();
-        //    Cup expectedValue4 = new Cup();
-        //    CustomList<Cup> customList = new CustomList<Cup>() { expectedValue1, expectedValue2, expectedValue3, expectedValue4 };
-        //    CustomList<Cup> customList2 = new CustomList<Cup>() { expectedValue1, expectedValue2, expectedValue3 };
-        //    //Act
-        //    results = customList - customList2;
-        //    //Assert
-        //    Assert.AreEqual(expectedValue4, results[0]);
-        //}
+        [TestMethod]
+        public void OverloadMinusOperatorForCustomObjectList()
+        {
+            CustomList<Item> results = new CustomList<Item>();
+            //Arrange
+            Item expectedValue1 = new Item("1");
+            Item expectedValue2 = new Item("2");
+            Item expectedValue3 = new Item("3");
+            Item expectedValue4 = new Item("4");
+            CustomList<Item> customList = new CustomList<Item>() { expectedValue1, expectedValue2, expectedValue3, expectedValue4 };
+            CustomList<Item> customList2 = new CustomList<Item>() { expectedValue1, expectedValue2, expectedValue3 };
+            //Act
+            results = customList - customList2;
+            //Assert
+            Assert.AreEqual(expectedValue4, results[0]);
+        }
         [TestMethod]
         public void SortListOfInt()
         {
@@ -440,6 +440,31 @@ namespace UnitTestProject1
             string expectedValue6 = "abcdef";
             string expectedValue7 = "abcdefg";
             string expectedValue8 = "abcdefgh";
+            //Act
+            results.Sort();
+            //Assert
+            Assert.AreEqual(expectedValue1, results[0]);
+            Assert.AreEqual(expectedValue2, results[1]);
+            Assert.AreEqual(expectedValue3, results[2]);
+            Assert.AreEqual(expectedValue4, results[3]);
+            Assert.AreEqual(expectedValue5, results[4]);
+            Assert.AreEqual(expectedValue6, results[5]);
+            Assert.AreEqual(expectedValue7, results[6]);
+            Assert.AreEqual(expectedValue8, results[7]);
+        }
+        [TestMethod]
+        public void SortListOfItem()
+        {
+            //Arrange
+            Item expectedValue1 = new Item("1");
+            Item expectedValue2 = new Item("2");
+            Item expectedValue3 = new Item("3");
+            Item expectedValue4 = new Item("4");
+            Item expectedValue5 = new Item("5");
+            Item expectedValue6 = new Item("6");
+            Item expectedValue7 = new Item("7");
+            Item expectedValue8 = new Item("8");
+            CustomList<Item> results = new CustomList<Item>() { expectedValue4, expectedValue2, expectedValue3, expectedValue1, expectedValue8, expectedValue7, expectedValue5, expectedValue6 };
             //Act
             results.Sort();
             //Assert
