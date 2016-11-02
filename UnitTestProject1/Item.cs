@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTestProject1
+namespace UnitTestProject
 {
     class Item : IComparable<Item>
     {
@@ -15,7 +15,7 @@ namespace UnitTestProject1
         }
         public int CompareTo(Item other)
         {
-            return name.CompareTo(other.name);
+            return this.name.CompareTo(other.name);
         }
     }
 }

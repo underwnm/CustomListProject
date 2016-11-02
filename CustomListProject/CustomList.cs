@@ -133,11 +133,11 @@ namespace CustomListProject
         {
             MyQuickSort(items, 0, size);
         }
-        public int CompareTo(T other)
+        private int CompareTo(T other)
         {
             return this.CompareTo(other);
         }
-        static int MyPartition<T>(T[] list, int left, int right) where T : IComparable<T>
+        private static int MyPartition<T>(T[] list, int left, int right) where T : IComparable<T>
         {
             int start = left;
             T pivot = list[start];
