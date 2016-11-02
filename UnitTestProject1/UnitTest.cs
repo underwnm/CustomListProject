@@ -477,5 +477,14 @@ namespace UnitTestProject
             Assert.AreEqual(expectedValue7, results[6]);
             Assert.AreEqual(expectedValue8, results[7]);
         }
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void OutOfRangeIndex()
+        {
+            //Assert
+            CustomList<int> results = new CustomList<int>() { 0, 4, 8, 12, 16 };
+            //Act
+            int result = results[10];
+        }
     }
 }

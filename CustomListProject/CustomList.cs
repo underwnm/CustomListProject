@@ -23,10 +23,18 @@ namespace CustomListProject
         {
             get
             {
+                if (index >= size || index < 0)
+                {
+                    throw new IndexOutOfRangeException();
+                }
                 return (T)this.items[index];
             }
             set
             {
+                if (index >= size || index < 0)
+                {
+                    throw new IndexOutOfRangeException();
+                }
                 this.items[index] = value;
             }
         }
