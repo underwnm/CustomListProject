@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomListProject
 {
-    public class CustomList<T> : CollectionBase, IEnumerable, IComparer
+    public class CustomList<T> : CollectionBase, IEnumerable where T : IComparable<T>
 
     {
         private int size;
@@ -37,10 +37,6 @@ namespace CustomListProject
                 yield return items[i];
             }
         }
-        public int Compare(object first, object second)
-        {
-            return (new CaseInsensitiveComparer()).Compare(second, first);
-        }
         public void Add(T item)
         {
             T[] tempItems = new T[size+buffer];
@@ -52,7 +48,16 @@ namespace CustomListProject
             items = tempItems;
             size++;
         }
-        public int IndexOf(T item)
+        public void Remove(T item)
+        {
+            int index = GetIndexOf(item);
+            while (index >= 0)
+            {
+                RemoveAt(index);
+                index = GetIndexOf(item);
+            }
+        }
+        private int GetIndexOf(T item)
         {
             int index = -1;
             for (int i = 0; i < size; i++)
@@ -61,15 +66,6 @@ namespace CustomListProject
                     index = i;
             }
             return index;
-        }
-        public void Remove(T item)
-        {
-            int index = IndexOf(item);
-            while (index >= 0)
-            {
-                RemoveAt(index);
-                index = IndexOf(item);
-            }
         }
         public new void RemoveAt(int index)
         {
@@ -80,6 +76,12 @@ namespace CustomListProject
                     items[i] = items[i + 1];             
                 }
                 size--;
+                T[] tempItems = new T[size + buffer];
+                for (int i = 0; i < size; i++)
+                {
+                    tempItems[i] = items[i];
+                }
+                items = tempItems;
             }
         }
         public new int Count()
@@ -88,33 +90,23 @@ namespace CustomListProject
         }
         public override string ToString()
         {
-            StringBuilder itemsStringList = new StringBuilder();
+            StringBuilder items = new StringBuilder();
             for (int i = 0; i < size; i++)
             {
-                itemsStringList.Append(items[i]);
+                items.Append(this.items[i]);
             }
-            return itemsStringList.ToString();
+            return items.ToString();
         }
-        public CustomList<T> Zipper(CustomList<T> zipperList)
+        public CustomList<T> Zipper(CustomList<T> list)
         {
-            CustomList<T> list = new CustomList<T>();
-            if (size >= zipperList.size)
+            CustomList<T> zipperedList = new CustomList<T>();
+            int smallestList = Math.Min(size, list.size);
+            for (int i = 0; i < smallestList; i++)
             {
-                for (int i = 0; i < zipperList.size; i++)
-                {
-                    list.Add(items[i]);
-                    list.Add(zipperList[i]);
-                }
-            } 
-            else if (zipperList.size > size)
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    list.Add(items[i]);
-                    list.Add(zipperList[i]);
-                }
+                zipperedList.Add(items[i]);
+                zipperedList.Add(list[i]);
             }
-            return list;
+            return zipperedList;
         }
         public static CustomList<T> operator +(CustomList<T> firstList, CustomList<T> secondList)
         {
@@ -136,6 +128,52 @@ namespace CustomListProject
                 firstList.Remove(secondList[i]);
             }
             return firstList;
+        }
+        public void Sort()
+        {
+            MyQuickSort(items, 0, size);
+        }
+        public int CompareTo(T other)
+        {
+            return this.CompareTo(other);
+        }
+        static int MyPartition<T>(T[] list, int left, int right) where T : IComparable<T>
+        {
+            int start = left;
+            T pivot = list[start];
+            left++;
+            right--;
+            while (true)
+            {
+                while (left <= right && list[left].CompareTo(pivot) < 0)
+                {
+                    left++;
+                }
+                while (left <= right && list[right].CompareTo(pivot) > 0)
+                {
+                    right--;
+                }
+                if (left > right)
+                {
+                    list[start] = list[left - 1];
+                    list[left - 1] = pivot;
+                    return left;
+                }
+                T temp = list[left];
+                list[left] = list[right];
+                list[right] = temp;
+            }
+        }
+        private static void MyQuickSort(T[] list, int left, int right)
+        {
+            if (list == null || list.Count() <= 1)
+                return;
+            if (left < right)
+            {
+                int pivotIndex = MyPartition(list, left, right);
+                MyQuickSort(list, left, pivotIndex - 1);
+                MyQuickSort(list, pivotIndex, right);
+            }
         }
     }
 }
